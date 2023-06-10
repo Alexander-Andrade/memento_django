@@ -2,11 +2,11 @@ from django.db import models
 
 
 class Event(models.Model):
-    description = models.TextField()
-    note = models.ForeignKey('logbook.Entry', on_delete=models.CASCADE, related_name='events')
+    description = models.TextField(null=False)
+    entry = models.ForeignKey('logbook.Entry', on_delete=models.CASCADE, related_name='events', null=False)
 
-    amount = models.DecimalField(max_digits=19, decimal_places=4)
-    currency = models.CharField(max_length=3)
+    amount = models.DecimalField(max_digits=19, decimal_places=4, null=True)
+    currency = models.CharField(max_length=3, null=True)
 
     starts_on = models.DateField(null=False)
 
