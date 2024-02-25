@@ -11,6 +11,7 @@ class EntryNestedView(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated, EntryPermission]
 
     def get_queryset(self):
+        # breakpoint()
         queryset = Entry.objects.filter(topic=self.kwargs['topic_pk'], user=self.request.user)
 
         if self.request.method == 'GET':
