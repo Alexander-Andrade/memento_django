@@ -2,7 +2,7 @@
 from django.urls import include, path
 from rest_framework_nested import routers
 
-from .views import BookmarkView, TopicNestedView, TopicView, EntryNestedView, EntryView, NoteNestedView
+from .views import BookmarkView, TopicNestedView, TopicView, EntryNestedView, EntryView, NoteNestedView, EventNestedView
 
 # api_router = rest_routers.DefaultRouter()
 # api_router.register(r'bookmarks', BookmarkView, 'bookmark')
@@ -27,6 +27,9 @@ entries_router.register(r'entries', EntryView, 'entry')
 notes_nested_router = routers.NestedSimpleRouter(entries_router, r'entries', lookup='entry')
 notes_nested_router.register(r'notes', NoteNestedView, basename='entry-notes')
 
+events_nested_router = routers.NestedSimpleRouter(entries_router, r'entries', lookup='entry')
+events_nested_router.register(r'events', EventNestedView, basename='entry-events')
+
 
 urlpatterns = [
     path(r'', include(bookmarks_router.urls)),
@@ -37,4 +40,5 @@ urlpatterns = [
 
     path(r'', include(entries_router.urls)),
     path(r'', include(notes_nested_router.urls)),
+    path(r'', include(events_nested_router.urls)),
 ]
