@@ -7,6 +7,8 @@ class Entry(models.Model):
     topic = models.ForeignKey('logbook.Topic', on_delete=models.CASCADE, related_name='entries', null=False)
     user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='entries', null=False)
 
+    minimized = models.BooleanField(default=False)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
