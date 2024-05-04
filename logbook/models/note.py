@@ -5,6 +5,8 @@ class Note(models.Model):
     description = models.TextField(null=False)
     entry = models.ForeignKey('logbook.Entry', on_delete=models.CASCADE, related_name='notes', null=False)
 
+    minimized = models.BooleanField(default=False)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
