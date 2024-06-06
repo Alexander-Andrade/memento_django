@@ -10,5 +10,4 @@ class CustomUserSerializer(serializers.ModelSerializer):
         fields = ('email', 'password')
 
     def create(self, data):
-        breakpoint()
         return CustomUser.objects.create_user(email=data['email'], password=data['password'])

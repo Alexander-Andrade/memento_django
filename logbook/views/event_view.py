@@ -1,4 +1,5 @@
 from django.utils import timezone
+from django.utils.dateparse import parse_datetime
 
 from rest_framework import permissions
 from rest_framework.authentication import TokenAuthentication
@@ -9,7 +10,6 @@ from ..serializers import EventSerializer
 
 
 class EventView(generics.ListCreateAPIView):
-    DATE_TIME_FORMAT = '%Y-%m-%dT%H:%M:%SZ'
     authentication_classes = [TokenAuthentication]
     serializer_class = EventSerializer
     permission_classes = [permissions.IsAuthenticated]
@@ -18,9 +18,9 @@ class EventView(generics.ListCreateAPIView):
         start_date_str = self.request.GET.get('from')
         end_date_str = self.request.GET.get('to')
 
-        start_date = timezone.datetime.strptime(start_date_str, self.DATE_TIME_FORMAT)
-        end_date = timezone.datetime.strptime(end_date_str, self.DATE_TIME_FORMAT)
-        breakpoint()
+        start_date = parse_datetime(start_date_str)
+        end_date = parse_datetime(end_date_str)
+
         queryset = Event.objects.filter(entry__user=self.request.user).filter(starts_at__range=(start_date, end_date))
 
         return queryset.order_by('starts_at')
