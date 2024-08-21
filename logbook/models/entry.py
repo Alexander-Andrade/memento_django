@@ -7,6 +7,7 @@ class Entry(models.Model):
     topic = models.ForeignKey('logbook.Topic', on_delete=models.CASCADE, related_name='entries', null=False)
     user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='entries', null=False)
 
+    files = models.JSONField(default=list)
     minimized = models.BooleanField(default=False)
 
     created_at = models.DateTimeField(auto_now_add=True)

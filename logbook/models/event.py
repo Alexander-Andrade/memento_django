@@ -7,6 +7,7 @@ class Event(models.Model):
 
     amount = models.DecimalField(max_digits=19, decimal_places=4, null=True)
     currency = models.CharField(max_length=3, null=True)
+    files = models.JSONField(default=list)
 
     minimized = models.BooleanField(default=False)
 
