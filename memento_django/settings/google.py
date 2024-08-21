@@ -1,0 +1,4 @@
+import os
+
+GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
+GOOGLE_DEVELOPER_KEY = os.getenv('GOOGLE_DEVELOPER_KEY')
